@@ -8,7 +8,7 @@ cores = {
 }
 
 
-def linha(tam = 50):
+def linha(tam=50):
     return '-' * tam
 
 
@@ -31,17 +31,10 @@ def cadastradas():
     try:
         arquivo = open('pessoas cadastradas.txt', 'r')
         for pessoa in arquivo.readlines():
-            p = pessoa.split()
-            nome = []
-            idade = 0
-            for i in p:
-                if i.isalpha():
-                    nome.append(i)
-                elif i == '<desconhecido>':
-                    nome.append(i)
-                if i.isdigit():
-                    idade = i
-            print(f"{' '.join(nome):<40}{idade} anos")
+            p = pessoa.split(';')
+            nome = p[0]
+            idade = p[1]
+            print(f"{nome:<40}{idade} anos")
         arquivo.close()
     except FileNotFoundError:
         print(f"{cores['vermelho']}Erro: ainda não há nenhuma pessoa registrada.{cores['limpa']}")
@@ -59,7 +52,9 @@ def cadastrar():
                 if pessoa['nome'].replace(' ', '').isalpha():
                     break
                 else:
-                    print(f"{cores['vermelho']}Erro: O nome deve ser composto apenas por letras.{cores['limpa']}")
+                    raise ValueError
+        except ValueError:
+            print(f"{cores['vermelho']}Erro: O nome deve ser composto apenas por letras.{cores['limpa']}")
         except KeyboardInterrupt:
             print(f"{cores['vermelho']}O usuário preferiu não informar o nome.{cores['limpa']}")
             pessoa['nome'] = '<desconhecido>'
@@ -79,8 +74,9 @@ def cadastrar():
             break
         else:
             break
-    for key, valor in pessoa.items():
-        arquivo.write(f'{key}: {valor} ')
+    for valor in pessoa.values():
+        arquivo.write(f'{valor}')
+        arquivo.write(';')
     arquivo.write('\n')
     print(f"{pessoa['nome']} foi cadastrado(a) com sucesso!")
     sleep(1)
