@@ -8,14 +8,22 @@ cores = {
 }
 
 
+def linha(tam = 50):
+    return '-' * tam
+
+
+def opcoes():
+    return f"""{cores['amarelo']}1{cores['limpa']} - {cores['azul']}Ver pessoas cadastradas{cores['limpa']}
+{cores['amarelo']}2{cores['limpa']} - {cores['azul']}Cadastrar nova Pessoa{cores['limpa']}
+{cores['amarelo']}3{cores['limpa']} - {cores['azul']}Sair do sistema{cores['limpa']}"""
+
+
 def menu(text):
-    print('-' * 50)
+    print(linha())
     print(f'{text}'.center(50))
-    print('-' * 50)
+    print(linha())
     if text == 'MENU PRINCIPAL':
-        print(f"{cores['amarelo']}1{cores['limpa']} - {cores['azul']}Ver pessoas cadastradas{cores['limpa']}")
-        print(f"{cores['amarelo']}2{cores['limpa']} - {cores['azul']}Cadastrar nova Pessoa{cores['limpa']}")
-        print(f"{cores['amarelo']}3{cores['limpa']} - {cores['azul']}Sair do sistema{cores['limpa']}")
+        print(opcoes())
 
 
 def cadastradas():
@@ -37,7 +45,7 @@ def cadastradas():
         arquivo.close()
     except FileNotFoundError:
         print(f"{cores['vermelho']}Erro: ainda não há nenhuma pessoa registrada.{cores['limpa']}")
-    sleep(2)
+    sleep(1)
 
 
 def cadastrar():
@@ -75,5 +83,5 @@ def cadastrar():
         arquivo.write(f'{key}: {valor} ')
     arquivo.write('\n')
     print(f"{pessoa['nome']} foi cadastrado(a) com sucesso!")
-    sleep(2)
+    sleep(1)
     arquivo.close()
