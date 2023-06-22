@@ -13,9 +13,9 @@ cores = {
     'limpa': '\033[m'
 }
 
-finalizar = False
+funcoes.menu('SISTEMA ARQUIVO v1.0')
 
-print('\n', 'DESAFIO 115'.center(38), '\n')
+finalizar = False
 
 while not finalizar:
     funcoes.menu('MENU PRINCIPAL')
