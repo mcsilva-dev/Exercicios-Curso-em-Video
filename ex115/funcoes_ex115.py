@@ -31,7 +31,7 @@ def cadastradas():
     try:
         arquivo = open('pessoas cadastradas.txt', 'r')
         for pessoa in arquivo.readlines():
-            p = pessoa.split(';')
+            p = pessoa.replace('\n', '').split(';')
             nome = p[0]
             idade = p[1]
             print(f"{nome:<40}{idade} anos")
@@ -58,8 +58,10 @@ def cadastrar():
         except KeyboardInterrupt:
             print(f"{cores['vermelho']}O usuário preferiu não informar o nome.{cores['limpa']}")
             pessoa['nome'] = '<desconhecido>'
+            arquivo.write(f"{pessoa['nome']}")
             break
         else:
+            arquivo.write(f"{pessoa['nome']};")
             break
     while True:
         try:
@@ -71,12 +73,11 @@ def cadastrar():
         except KeyboardInterrupt:
             print(f"{cores['vermelho']}O usuário preferiu não informar a idade.{cores['limpa']}")
             pessoa['idade'] = 0
+            arquivo.write(f"{pessoa['idade']}")
             break
         else:
+            arquivo.write(f"{pessoa['idade']}")
             break
-    for valor in pessoa.values():
-        arquivo.write(f'{valor}')
-        arquivo.write(';')
     arquivo.write('\n')
     print(f"{pessoa['nome']} foi cadastrado(a) com sucesso!")
     sleep(1)
