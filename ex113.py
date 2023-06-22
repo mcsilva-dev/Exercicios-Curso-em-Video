@@ -16,6 +16,7 @@ def leiafloat(question):
             num = float(input(question))
         except ValueError:
             print(f"{cores['vermelho']}ERRO: por favor, digite um valor real válido.{cores['limpa']}")
+            continue
         except KeyboardInterrupt:
             print(f"\n{cores['vermelho']}ERRO: O usuário preferiu não digitar este número.{cores['limpa']}")
             return 0
@@ -31,6 +32,7 @@ def leiaint(question):
             num = int(input(question))
         except ValueError:
             print(f"{cores['vermelho']}ERRO: por favor, digite um valor inteiro válido.{cores['limpa']}")
+            continue
         except KeyboardInterrupt:
             print(f"\n{cores['vermelho']}ERRO: O usuário preferiu não digitar esse número.{cores['limpa']}")
             return 0
