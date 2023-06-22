@@ -18,13 +18,7 @@ finalizar = False
 print('\n', 'DESAFIO 115'.center(38), '\n')
 
 while not finalizar:
-    print('-' * 50)
-    print('MENU PRINCIPAL'.center(50))
-    print('-' * 50)
-    print(f"{cores['amarelo']}1{cores['limpa']} - {cores['azul']}Ver pessoas cadastradas{cores['limpa']}")
-    print(f"{cores['amarelo']}2{cores['limpa']} - {cores['azul']}Cadastrar nova Pessoa{cores['limpa']}")
-    print(f"{cores['amarelo']}3{cores['limpa']} - {cores['azul']}Sair do sistema{cores['limpa']}")
-
+    funcoes.menu('MENU PRINCIPAL')
     while True:
         try:
             match int(input(f"{cores['amarelo']}Sua opção: {cores['limpa']}")):
@@ -33,9 +27,7 @@ while not finalizar:
                 case 2:
                     funcoes.cadastrar()
                 case 3:
-                    print('-' * 50)
-                    print('Saindo do sistema... Até logo!'.center(50))
-                    print('-' * 50)
+                    funcoes.menu('Saindo do sistema... Até logo!')
                     finalizar = True
                     break
                 case _:
@@ -50,4 +42,4 @@ while not finalizar:
             print(f'Ocorreu um erro inesperado: {erro}')
         else:
             break
-        sleep(1)
+    sleep(1)

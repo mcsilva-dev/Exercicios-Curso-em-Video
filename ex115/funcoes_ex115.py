@@ -1,15 +1,25 @@
 from time import sleep
 
 cores = {
+    'amarelo': '\033[1;33;3m',
+    'azul': '\033[1;36;3m',
     'vermelho': '\033[1;31;3m',
     'limpa': '\033[m'
 }
 
 
+def menu(text):
+    print('-' * 50)
+    print(f'{text}'.center(50))
+    print('-' * 50)
+    if text == 'MENU PRINCIPAL':
+        print(f"{cores['amarelo']}1{cores['limpa']} - {cores['azul']}Ver pessoas cadastradas{cores['limpa']}")
+        print(f"{cores['amarelo']}2{cores['limpa']} - {cores['azul']}Cadastrar nova Pessoa{cores['limpa']}")
+        print(f"{cores['amarelo']}3{cores['limpa']} - {cores['azul']}Sair do sistema{cores['limpa']}")
+
+
 def cadastradas():
-    print('-' * 50)
-    print('PESSOAS CADASTRADAS'.center(50))
-    print('-' * 50)
+    menu('PESSOAS CADASTRADAS')
     try:
         arquivo = open('pessoas cadastradas.txt', 'r')
         for pessoa in arquivo.readlines():
@@ -18,6 +28,8 @@ def cadastradas():
             idade = 0
             for i in p:
                 if i.isalpha():
+                    nome.append(i)
+                elif i == '<desconhecido>':
                     nome.append(i)
                 if i.isdigit():
                     idade = i
@@ -29,15 +41,13 @@ def cadastradas():
 
 
 def cadastrar():
-    print('-' * 50)
-    print('NOVO CADASTRO'.center(50))
-    print('-' * 50)
+    menu('NOVO CADASTRO')
     arquivo = open('pessoas cadastradas.txt', 'a')
     pessoa = dict()
     while True:
         try:
             while True:
-                pessoa['nome'] = ' '.join(str(input('Nome: ')).title().strip().split())
+                pessoa['nome'] = ' '.join(str(input('Nome: ')).title().split())
                 if pessoa['nome'].replace(' ', '').isalpha():
                     break
                 else:
@@ -67,4 +77,3 @@ def cadastrar():
     print(f"{pessoa['nome']} foi cadastrado(a) com sucesso!")
     sleep(2)
     arquivo.close()
-
